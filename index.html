@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="static/images/pixelthink-icon.png">
+
+  <title>SAM4D: Segment Anything in Camera and LiDAR Streams</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://songw-zju.github.io">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://pixelthink.github.io">
+            PixelThink
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SAM4D: Segment Anything in Camera and LiDAR Streams</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=LctFPtgAAAAJ&hl=en">Jianyun Xu</a><sup>1*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://songw-zju.github.io">Song Wang</a><sup>1,2*</sup>,</span>
+            <span class="author-block">
+              <a href="https://fangggf.github.io">Ziqian Ni</a><sup>1*</sup>,</span>
+            <span class="author-block">
+              <a href="https://lxtgh.github.io">Chunyong Hu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=G6IztksAAAAJ&hl=en">Sheng Yang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://person.zju.edu.cn/en/jkzhu">Jianke Zhu</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.cn/incareer/in/qiang-li-37196013">Qiang Li</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>AD Lab, CaiNiao Inc., Alibaba Group</span>
+            <span class="author-block"><sup>2</sup>Zhejiang University</span>  
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2506.xxxxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2506.xxxxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div align='center'>
+          <a><img src="static/images/teaser.png"  height="220" ></a>
+        </div>
+      <div class="subtitle has-text-left">
+        We aim to build a foundation model for 4D segmentation by introducing three interconnected components: (a) a promptable multi-modal segmentation <b>task</b>, extending segmentation to both camera and LiDAR streams; (b) a segmentation <b>model</b> (SAM4D) that enables 2D-3D joint segmentation with cross-modal prompting and temporal alignment; and (c) an automatic <b>data</b> engine for constructing Waymo-4DSeg, a large-scale dataset with over 300k camera-LiDAR associated masklets, providing pesudo labels for SAM4D training.
+      <div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present SAM4D, a multi-modal and temporal foundation model designed for promptable segmentation across camera and LiDAR streams. Unified Multi-modal Positional Encoding (UMPE) is introduced to align camera and LiDAR features in a shared 3D space, enabling seamless cross-modal prompting and interaction. Additionally, we propose Motion-aware Cross-modal Memory Attention (MCMA), which leverages ego-motion compensation to enhance temporal consistency and long-horizon feature retrieval, ensuring robust segmentation across dynamically changing autonomous driving scenes. To avoid annotation bottlenecks, we develop a multi-modal automated data engine that synergizes VFM-driven video masklets, spatiotemporal 4D reconstruction, and cross-modal masklet fusion. This framework generates camera-LiDAR aligned pseudo-labels at a speed orders of magnitude faster than human annotation while preserving VFM-derived semantic fidelity in point cloud representations. We conduct extensive experiments on the constructed Waymo-4DSeg, which demonstrate the powerful cross-modal segmentation ability and great potential in data annotation of proposed SAM4D.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+    <!-- Exp. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Task: Promptable Multi-modal Segmentation </h2>
+        <div class="content has-text-justified">
+          <p>
+          The <b>Promptable Multimodal Segmentation (PMS)</b> task is designed to enable <b>interactive</b>, <b>cross-modal</b>, and <b>temporal</b> segmentation across both camera and LiDAR streams.
+          Unlike traditional segmentation tasks that rely on a single modality or frame-by-frame processing, PMS allows prompts in either 2D (images) or 3D (LiDAR point clouds)
+          to guide segmentation across the entire sequence. 
+          </p>
+        </div>
+        <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/task.mp4"
+                type="video/mp4">
+      </video>
+        </div>
+        
+        <br/>
+
+
+      </div>
+    </div>
+    <!--/ Exp. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+    <!-- Method. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Model: Segment Anything Model in 4D</h2>
+        <div class="content has-text-justified">
+          <p>
+          <b>Overview of the Segment Anything Model in 4D (SAM4D) workflow. </b>
+          The image and LiDAR encoders generate modality-specific embeddings, which are aligned through the proposed <b>Unified Multi-modal Positional Encoding</b>. 
+          The <b>Motion-aware Cross-modal Memory Attention</b> then processes multi-modal and temporal features, incorporating ego-motion for improved feature interaction. 
+          Finally, the updated image and LiDAR features are queried efficiently by mask decoder with diverse input prompts from various modalities.
+          </p>
+        </div>
+        <div align='center'>
+          <a><img src="static/images/framework.png"  height="220" ></a>
+        </div>
+        </div>
+        <br/>
+      </div>
+    </div>
+    <!--/ Method. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+    <!-- Bench. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Data: Data Engine and Dataset</h2>
+        <div align='center'>
+          <a><img src="static/images/data_engine.png"  height="220" ></a>
+        </div>
+        <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/dataset.mp4"
+                type="video/mp4">
+      </video>
+        </div>
+        <br/>
+
+      </div>
+    </div>
+    <!--/ Bench. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+    <!-- Exp. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Quantitative Results</h2>
+        <div align='center'>
+          <a><img src="static/images/table1.png"  height="220" ></a>
+        </div>
+        <div align='center'>
+          <a><img src="static/images/table2.png"  height="220" ></a>
+        </div>
+        </div>
+        <br/>
+
+
+      </div>
+    </div>
+    <!--/ Exp. -->
+  </div>
+</section>
+
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{xu2025sam4d,
+  title     = {SAM4D: Segment Anything in Camera and LiDAR Streams},
+  author    = {Xu, Jianyun and Wang, Song and Ni, Ziqian and  Hu, Chunyong and Yang, Sheng and Zhu, Jianke and Li, Qiang},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
